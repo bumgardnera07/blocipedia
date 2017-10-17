@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
           
   after_initialize { self.role ||= :standard }
   enum role: [:standard, :admin, :premium]
+  
+   has_many :wikis
+   
+  def publish_wikis(wikis)
+      wikis.each do |f|
+          f.update_attributes(:private => nil)
+      end
+  end
 end

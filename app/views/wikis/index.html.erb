@@ -1,12 +1,14 @@
 <h1>All Wikis</h1>
-<% @wikis.each do |wiki| %>
-   <div class="media">
+<% @wikis.each do |l| %>
+   <% if l.private != true || current_user.admin? || current_user.premium? %> 
+    <div class="media">
      <div class="media-body">
        <h4 class="media-heading">
-         <%= link_to wiki.title, wiki %>
+         <%= link_to l.title, l %>
        </h4>
      </div>
    </div>
+  <% end %>
 <% end %>
 
 <div class="col-md-4">

@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171011030930) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.integer  "role"
+    t.integer  "user_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

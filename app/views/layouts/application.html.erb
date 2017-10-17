@@ -34,10 +34,10 @@
    <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
  <% end %>
  
- <% if current_user.premium? %>
+ <% if current_user != nil && current_user.premium? %>
   <div class="well well-sm">
     Your Role: <strong><%= current_user.role %></strong><br>
-    <%= link_to 'Downgrade your account?', user_path(current_user), method: :patch, class: 'btn btn-info' %>
+    <%= link_to 'Downgrade your account? Your private wikis will become public.', user_path(current_user), method: :patch, class: 'btn btn-info' %>
   </div>
 <% end %>
 
