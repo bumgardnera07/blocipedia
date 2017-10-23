@@ -14,4 +14,13 @@ class User < ActiveRecord::Base
           f.update_attributes(:private => nil)
       end
   end
+  
+  def collaborators
+      Collaborator.where(user_id: id)
+  end
+  
+  def wikis
+      collaborators.wikis
+  end
+  
 end
