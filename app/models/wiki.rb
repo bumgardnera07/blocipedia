@@ -1,12 +1,10 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
   
-  def collaborators
-      Collaborator.where(wiki_id: id)
-  end
+  has_many :collaborators
+  has_many :users, through: :collaborators
   
-  def users
-      collaborators.users
+  def add_collaborator(currentwiki, useremail)
+    Collaborator.new(user: (User.find_by email: useremail), wiki: currentwiki)
   end
-  
 end

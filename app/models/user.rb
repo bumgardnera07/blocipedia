@@ -7,20 +7,14 @@ class User < ActiveRecord::Base
   after_initialize { self.role ||= :standard }
   enum role: [:standard, :admin, :premium]
   
-   has_many :wikis
+  has_many :wikis
    
   def publish_wikis(wikis)
       wikis.each do |f|
           f.update_attributes(:private => nil)
       end
   end
-  
-  def collaborators
-      Collaborator.where(user_id: id)
-  end
-  
-  def wikis
-      collaborators.wikis
-  end
-  
+
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
 end

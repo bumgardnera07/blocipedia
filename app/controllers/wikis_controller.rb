@@ -17,6 +17,8 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
     @wiki.user_id = current_user.id
+    @wiki.collaborator = User.find_by_email(params[:collaborator])
+    @collaborator = Collaborator.new(user_id: @wiki.collaborator.id, wiki_id: @wiki.id)
     
     if @wiki.save
       
@@ -33,6 +35,8 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
+    @wiki.collaborator = User.find_by_email(params[:collaborator])
+    @collaborator = Collaborator.new(user_id: @wiki.collaborator.id, wiki_id: @wiki.id)
     
     if @wiki.save
       flash[:notice] = "Wiki updated"
